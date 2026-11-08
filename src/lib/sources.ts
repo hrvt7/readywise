@@ -21,6 +21,21 @@ export interface Source {
 
 const BASE_SOURCES: Source[] = [
   {
+    id: "us-fsis-outage",
+    publisher: "USDA Food Safety and Inspection Service",
+    title: "Keep Your Food Safe During Emergencies: Power Outages",
+    region: "US",
+    year: "2024",
+    url: "https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/emergencies/keep-your-food-safe-during-emergencies",
+    kind: "official",
+    checked: "2026-11-08",
+    facts: [
+      "Zárt ajtó mellett a hűtő kb. 4 órán át tartja biztonságosan hidegen az ételt.",
+      "A tele fagyasztó kb. 48 óráig, a félig tele kb. 24 óráig tartja a hőmérsékletét.",
+      "Fagyasztott vizes palackok, jégakkuk segítenek tovább hidegen tartani az ételt.",
+    ],
+  },
+  {
     id: "eu-preparedness-2025",
     publisher: "Európai Bizottság",
     title: "EU Preparedness Union Strategy (sajtóközlemény)",

@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Forrásregiszter", description: "Min
 
 const kindLabel = { official: "hivatalos", "official-mirror": "hivatalos (önkormányzati tükör)", press: "sajtó – kiegészítő" };
 
-const regionName = (c: string) => (c === "EU" ? "Európai Unió" : COUNTRIES.find((x) => x.code === c)?.name ?? c);
+const regionName = (c: string) => (c === "EU" ? "Európai Unió" : c === "US" ? "Egyesült Államok (élelmiszer-biztonság)" : COUNTRIES.find((x) => x.code === c)?.name ?? c);
 const order = ["EU", ...COUNTRIES.map((c) => c.code)];
 const rank = (c: string) => (order.indexOf(c) < 0 ? 999 : order.indexOf(c));
 const groups = Object.entries(

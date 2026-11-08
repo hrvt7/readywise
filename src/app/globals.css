@@ -174,3 +174,9 @@ body {
   .text-grad { color: #065f46; background: none; -webkit-text-fill-color: #065f46; }
   * { color: #000 !important; }
 }
+
+/* szimulátor csúszka */
+.sim-range { -webkit-appearance: none; appearance: none; height: 8px; border-radius: 999px; outline: none;
+  background: linear-gradient(90deg, #34d399, #22d3ee var(--p), rgba(255,255,255,.1) var(--p)); }
+.sim-range::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 999px; background: #fff; border: 3px solid #06080f; box-shadow: 0 0 0 2px #22d3ee, 0 6px 18px rgba(34,211,238,.45); cursor: grab; }
+.sim-range::-moz-range-thumb { width: 26px; height: 26px; border-radius: 999px; background: #fff; border: 3px solid #06080f; box-shadow: 0 0 0 2px #22d3ee; cursor: grab; }
