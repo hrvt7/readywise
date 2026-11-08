@@ -43,7 +43,7 @@ export function Hero() {
 
           <motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.8 }} className="mt-9 flex flex-wrap items-center gap-3">
             <Link href="/terv" className="btn-primary inline-flex items-center gap-2 rounded-xl px-6 py-3.5 font-bold">Tervet készítek <HoverIcon name="arrow" size={18} /></Link>
-            <Link href="/forgatokonyvek" className="btn-ghost rounded-xl px-6 py-3.5 font-semibold">Mi történik 72 óra alatt?</Link>
+            <Link href="/szimulator" className="btn-ghost rounded-xl px-6 py-3.5 font-semibold">Mi történik 72 óra alatt?</Link>
           </motion.div>
 
           <motion.ul initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.95, duration: 0.8 }} className="mt-9 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[.12em] text-dim">

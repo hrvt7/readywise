@@ -18,7 +18,7 @@ export default function Simulator() {
   const [t, setT] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [season, setSeason] = useState<Season>("winter");
-  const [tapWorks, setTapWorks] = useState(false);
+  const [tapWorks, setTapWorks] = useState(true);
   const [freezerFull, setFreezerFull] = useState(true);
   const [plan, setPlan] = useState<Plan | null>(null);
   const [has, setHas] = useState({ powerbank: false, radio: false, flashlight: false, candles: false, water: false });

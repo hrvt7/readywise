@@ -85,7 +85,7 @@ export default function PowerCalc() {
         </div>
 
         {/* eredmény */}
-        <aside className="min-w-0 space-y-4 lg:sticky lg:top-24 lg:h-fit">
+        <aside id="aram-eredmeny" className="min-w-0 scroll-mt-24 space-y-4 lg:sticky lg:top-24 lg:h-fit">
           <div className="surface relative overflow-hidden rounded-3xl p-5">
             <div className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-[70px] ${enough ? "bg-emerald-400/25" : "bg-amber-400/25"}`} />
             <div className="relative">
@@ -150,7 +150,19 @@ export default function PowerCalc() {
         </aside>
       </div>
 
-      <p className="mt-10 max-w-3xl text-xs leading-relaxed text-mute">
+      {/* mobil összegző sáv */}
+      <div className="fixed inset-x-3 bottom-3 z-40 lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+        <button onClick={() => document.getElementById("aram-eredmeny")?.scrollIntoView({ behavior: "smooth", block: "start" })} className="flex w-full items-center gap-3 rounded-2xl border border-white/10 bg-ink/85 px-4 py-3 text-left shadow-[0_12px_40px_rgba(0,0,0,.5)] backdrop-blur-xl">
+          <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${enough ? "bg-emerald-400/15 text-emerald-300" : "bg-amber-400/15 text-amber-300"}`}><HoverIcon name="battery" size={20} /></span>
+          <span className="min-w-0 flex-1 leading-tight">
+            <span className="block text-[11px] uppercase tracking-wider text-mute">{Math.round(sum.total)} Wh/nap · {src.name.replace("Hordozható erőmű", "Erőmű")}</span>
+            <span className="block text-sm font-semibold">{fmtH(hrs)} {enough ? "· kitart" : `· kell ≈${Math.round(need)} Wh`}</span>
+          </span>
+          <span className="text-xs font-semibold text-cyan">Eredmény ↓</span>
+        </button>
+      </div>
+
+      <p className="mt-10 max-w-3xl pb-20 text-xs leading-relaxed text-mute lg:pb-0">
         A fogyasztási értékek tipikus gyártói adatlapok alapján kerekített becslések – a saját készüléked címkéjén lévő érték az irányadó, ezért minden érték átírható. Veszteségek: USB-ről 10 %, inverteren 15 %. A napelem hozama magyarországi, átlagos téli és nyári napra becsült.
       </p>
     </div>

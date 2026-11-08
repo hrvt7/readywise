@@ -150,6 +150,34 @@ export default function Home() {
         </Reveal>
       </section>
 
+      {/* TOOLS */}
+      <section className="mx-auto mt-32 max-w-7xl px-5 md:px-8">
+        <Reveal>
+          <p className="eyebrow">Eszközök</p>
+          <h2 className="font-display mt-3 max-w-3xl text-3xl font-bold leading-[1.08] sm:text-4xl md:text-[44px]">Ne csak olvasd. <span className="text-grad">Próbáld ki.</span></h2>
+        </Reveal>
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {[
+            { href: "/szimulator", icon: "unplug" as const, kicker: "Szimulátor", title: "Elment az áram. És most?", text: "Pörgesd előre az időt 72 óráig: mikor romlik a hűtő, mikor merül le a telefon, mikor hűl ki a lakás – a te terved alapján.", accent: "#fbbf24" },
+            { href: "/aram", icon: "battery" as const, kicker: "Áramtartalék", title: "Mekkora akku kell?", text: "Pipáld ki, mit akarsz működtetni, és megmondjuk, hány órát bír a powerbank vagy az erőmű, és mekkorát érdemes venni.", accent: "#22d3ee" },
+            { href: "/csomag", icon: "bag" as const, kicker: "Vészcsomag", title: "Mi fér bele 20 kilóba?", text: "Pakold be a hátizsákot: a mérleg és a katasztrófavédelem listája szól, ha túl nehéz vagy hiányzik valami.", accent: "#f472b6" },
+          ].map((t, i) => (
+            <Reveal key={t.href} delay={i * 0.06}>
+              <Spot href={t.href} as="a" className="group relative block h-full overflow-hidden rounded-3xl p-6 transition duration-500 hover:-translate-y-1">
+                <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full blur-[70px] transition-opacity duration-500 group-hover:opacity-100" style={{ background: `${t.accent}33`, opacity: 0.6 }} />
+                <div className="relative" data-hover>
+                  <span className="grid h-12 w-12 place-items-center rounded-2xl" style={{ background: `${t.accent}1f`, color: t.accent, boxShadow: `inset 0 0 0 1px ${t.accent}40` }}><HoverIcon name={t.icon} size={24} /></span>
+                  <div className="eyebrow mt-5" style={{ color: t.accent }}>{t.kicker}</div>
+                  <h3 className="font-display mt-2 text-xl font-bold">{t.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-mute">{t.text}</p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold" style={{ color: t.accent }}>Kipróbálom <HoverIcon name="arrow" size={16} /></span>
+                </div>
+              </Spot>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* SITUATIONS */}
       <section className="mx-auto mt-32 max-w-7xl px-5 md:px-8">
         <Reveal>
