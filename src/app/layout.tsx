@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Manrope, Unbounded } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Footer, Nav } from "@/components/Chrome";
 
-const sora = Unbounded({ subsets: ["latin", "latin-ext"], variable: "--font-sora", weight: ["400", "500", "600", "700", "800"] });
-const manrope = Manrope({ subsets: ["latin", "latin-ext"], variable: "--font-manrope" });
-const jet = JetBrains_Mono({ subsets: ["latin", "latin-ext"], variable: "--font-jet", weight: ["400", "500"] });
+const sora = localFont({ variable: "--font-sora", display: "swap", src: [{ path: "../fonts/unbounded-latin.woff2", weight: "400 900" }, { path: "../fonts/unbounded-latin-ext.woff2", weight: "400 900" }] });
+const manrope = localFont({ variable: "--font-manrope", display: "swap", src: [{ path: "../fonts/manrope-latin.woff2", weight: "200 800" }, { path: "../fonts/manrope-latin-ext.woff2", weight: "200 800" }] });
+const jet = localFont({ variable: "--font-jet", display: "swap", src: [{ path: "../fonts/jetbrains-latin.woff2", weight: "100 800" }, { path: "../fonts/jetbrains-latin-ext.woff2", weight: "100 800" }] });
 
 const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://haven72.vercel.app";
 
