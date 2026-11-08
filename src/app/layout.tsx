@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Footer, Nav } from "@/components/Chrome";
 
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="hu" className={`${sora.variable} ${manrope.variable} ${jet.variable} pui-theme`}>
       <body className="min-h-screen overflow-x-hidden">
         <div className="noise" aria-hidden />
+        <Analytics />
         <Nav />
         <main>{children}</main>
         <Footer />
