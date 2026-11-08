@@ -1,0 +1,26 @@
+<!doctype html><html lang="hu"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Offline · Haven72</title><meta name="robots" content="noindex">
+<style>
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#06080f;color:#f2f4f9;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;display:flex;flex-direction:column}
+.wrap{max-width:640px;margin:0 auto;padding:max(24px,env(safe-area-inset-top)) 20px 40px;width:100%}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.5px}.logo b{color:#22d3ee}
+.eyebrow{margin-top:56px;font:600 11px/1 ui-monospace,monospace;letter-spacing:3px;color:#9aa6bf;text-transform:uppercase}
+h1{font-size:34px;line-height:1.08;letter-spacing:-1px;margin:14px 0 12px;font-weight:800}p{color:#9aa6bf;margin:0 0 28px}
+.grid{display:grid;gap:10px;grid-template-columns:1fr}@media(min-width:520px){.grid{grid-template-columns:1fr 1fr}}
+a.c{display:block;padding:18px;border-radius:18px;text-decoration:none;color:inherit;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 0 1px rgba(255,255,255,.07)}
+a.c strong{display:block;font-size:16px}a.c span{display:block;color:#9aa6bf;font-size:13px;margin-top:4px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:99px;background:#fbbf24;margin-right:8px;animation:p 1.2s infinite}@keyframes p{50%{opacity:.3}}
+.note{margin-top:28px;font-size:13px;color:#6f7a93}
+</style></head><body><div class="wrap">
+<div class="logo"><svg width="30" height="30" viewBox="0 0 64 64" fill="none"><path d="M32 6 L56 22 V46 Q56 58 44 58 H20 Q8 58 8 46 V22 Z" stroke="#22d3ee" stroke-width="4.5" stroke-linejoin="round"/><rect x="20" y="42" width="24" height="5" rx="2.5" fill="#34d399"/><rect x="24" y="32" width="16" height="5" rx="2.5" fill="#22d3ee"/><circle cx="32" cy="24" r="3.5" fill="#818cf8"/></svg>Haven<b>72</b></div>
+<div class="eyebrow"><span class="dot"></span>Nincs internet</div>
+<h1>Ez az oldal még nincs letöltve.</h1>
+<p>Ami egyszer már betöltődött, az offline is elérhető. A legfontosabbak mindig itt vannak:</p>
+<div class="grid">
+<a class="c" href="/terv"><strong>A tervem</strong><span>Pontszám, hiánylista, bevásárlólista</span></a>
+<a class="c" href="/terv/kartya"><strong>Hűtőkártya</strong><span>Segélyhívók, találkozópont, kontaktok</span></a>
+<a class="c" href="/helyzetek"><strong>Mit tegyek, ha…</strong><span>Hivatalos útmutatók helyzetenként</span></a>
+<a class="c" href="/orszagok/hu"><strong>Magyarország</strong><span>Szirénajelek, teendők, tippek</span></a>
+</div>
+<p class="note">Segélyhívó: <strong style="color:#fff">112</strong> · A terved és a hűtőkártyád adatai ezen a készüléken vannak elmentve, nem a felhőben.</p>
+<script>addEventListener("online",()=>location.reload())</script>
+</div></body></html>
