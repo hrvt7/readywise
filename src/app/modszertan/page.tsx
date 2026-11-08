@@ -51,7 +51,7 @@ export default function Page() {
       <div className="mx-auto max-w-4xl space-y-5 px-5 md:px-8">
         {blocks.map((b, i) => (
           <Reveal key={b.id} delay={i * 0.06}>
-            <section id={b.id} className="glass scroll-mt-28 rounded-3xl p-7">
+            <section id={b.id} className="surface scroll-mt-28 rounded-3xl p-7">
               <h2 className="font-display text-2xl font-semibold">{b.t}</h2>
               <ul className="mt-4 space-y-3 text-[15px] leading-relaxed text-mute">
                 {b.p.map((x) => (

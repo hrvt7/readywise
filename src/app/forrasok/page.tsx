@@ -14,7 +14,7 @@ export default function Page() {
       <div className="mx-auto max-w-5xl space-y-4 px-5 md:px-8">
         {SOURCES.map((s, i) => (
           <Reveal key={s.id} delay={(i % 4) * 0.05}>
-            <article id={s.id} className="glass scroll-mt-28 rounded-3xl p-6 target:ring-2 target:ring-cyan">
+            <article id={s.id} className="surface scroll-mt-28 rounded-3xl p-6 target:ring-2 target:ring-cyan">
               <div className="flex flex-wrap items-center gap-2 text-xs">
                 <span className="font-display rounded-lg bg-white/8 px-2 py-1 font-bold">{s.region}</span>
                 <span className={`rounded-full px-2.5 py-1 ${s.kind === "press" ? "bg-amber-400/10 text-amber-300" : "bg-emerald-400/10 text-emerald-300"}`}>{kindLabel[s.kind]}</span>

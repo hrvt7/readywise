@@ -27,17 +27,17 @@ export default async function Page({ params }: { params: Promise<{ code: string 
       <div className="mx-auto grid max-w-7xl gap-6 px-5 md:px-8 lg:grid-cols-[1.2fr_.8fr]">
         <div className="space-y-6">
           <Reveal className="grid grid-cols-2 gap-4">
-            <div className="glass rounded-3xl p-6">
-              <div className="font-display text-5xl font-bold">{e.days}<span className="ml-2 text-xl text-mute">nap</span></div>
+            <div className="surface rounded-3xl p-6">
+              <div className="font-display text-5xl font-bold tabular-nums">{e.days}<span className="ml-2 text-xl text-mute">nap</span></div>
               <div className="mt-2 text-sm text-mute">{e.daysIsFallback ? "Nincs hivatalos szám – EU 72 órás alap" : "Hivatalosan ajánlott önellátás"}</div>
             </div>
-            <div className="glass rounded-3xl p-6">
-              <div className="font-display text-5xl font-bold">{e.water}<span className="ml-2 text-xl text-mute">liter</span></div>
+            <div className="surface rounded-3xl p-6">
+              <div className="font-display text-5xl font-bold tabular-nums">{e.water}<span className="ml-2 text-xl text-mute">liter</span></div>
               <div className="mt-2 text-sm text-mute">{e.waterIsFallback ? "víz/fő/nap – tartalékérték (NL)" : "víz fejenként naponta – hivatalos"}</div>
             </div>
           </Reveal>
           <Reveal delay={0.08}>
-            <div className="glass rounded-3xl p-6">
+            <div className="surface rounded-3xl p-6">
               <h2 className="font-display text-xl font-semibold">A lényeg</h2>
               <ul className="mt-4 space-y-3">
                 {c.points.map((p) => (
@@ -51,7 +51,7 @@ export default async function Page({ params }: { params: Promise<{ code: string 
             </div>
           </Reveal>
           <Reveal delay={0.12}>
-            <div className="glass rounded-3xl p-6">
+            <div className="surface rounded-3xl p-6">
               <h2 className="font-display text-xl font-semibold">Források</h2>
               <ul className="mt-4 space-y-3">
                 {c.sources.map((id) => {
@@ -69,7 +69,7 @@ export default async function Page({ params }: { params: Promise<{ code: string 
           </Reveal>
         </div>
         <Reveal delay={0.1}>
-          <aside className="glass rounded-3xl p-6 lg:sticky lg:top-24">
+          <aside className="surface rounded-3xl p-6 lg:sticky lg:top-24">
             <h2 className="font-display text-xl font-semibold">Segélyhívó számok</h2>
             <div className="mt-4 space-y-2">
               {c.emergency.map((x) => (

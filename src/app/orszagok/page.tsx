@@ -16,7 +16,7 @@ export default function Page() {
           const e = effectiveRule(c);
           return (
             <Reveal key={c.code} delay={(i % 3) * 0.08}>
-              <Link href={`/orszagok/${c.code.toLowerCase()}`} className="glass group block h-full rounded-3xl p-6 transition duration-500 hover:-translate-y-1.5">
+              <Link href={`/orszagok/${c.code.toLowerCase()}`} className="relative surface surface-hover spot group block h-full rounded-3xl p-6 transition duration-500 hover:-translate-y-1.5">
                 <div className="flex items-start justify-between">
                   <div className="font-display flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-400/25 to-emerald-400/20 text-lg font-bold ring-1 ring-white/10">{c.code}</div>
                   <span className={`rounded-full px-2.5 py-1 text-xs ${c.status === "official" ? "bg-emerald-400/10 text-emerald-300" : "bg-amber-400/10 text-amber-300"}`}>{c.status === "official" ? "hivatalos számok" : "részleges"}</span>
@@ -38,7 +38,7 @@ export default function Page() {
           );
         })}
         <Reveal delay={0.1}>
-          <div className="glass flex h-full flex-col items-start justify-center rounded-3xl p-6">
+          <div className="surface flex h-full flex-col items-start justify-center rounded-3xl p-6">
             <GlobeIcon size={56} />
             <h2 className="font-display mt-4 text-xl font-semibold">Hamarosan</h2>
             <p className="mt-2 text-sm text-mute">Lengyelország, Szlovákia, Románia, Franciaország – az eredeti kiadványok ellenőrzése után kerülnek fel.</p>

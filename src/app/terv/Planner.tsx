@@ -39,6 +39,7 @@ function Stepper({ label, value, set, min = 0, max = 12 }: { label: string; valu
 export default function Planner() {
   const [s, setS] = useState<State>(DEFAULT);
   const [loaded, setLoaded] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     try {
@@ -79,12 +80,13 @@ export default function Planner() {
     <div className="mx-auto max-w-7xl px-5 pt-28 md:px-8 md:pt-36">
       <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div>
-          <p className="no-print text-sm font-semibold uppercase tracking-[.2em] text-mint">Tervező</p>
-          <h1 className="font-display mt-3 text-4xl font-bold leading-[1.08] tracking-tight md:text-6xl">A te felkészülési terved</h1>
+          <p className="no-print eyebrow">Tervező</p>
+          <h1 className="font-display mt-3 text-4xl font-bold leading-[1.08] tracking-tight md:text-[52px]">A te felkészülési terved</h1>
           <p className="mt-3 max-w-2xl text-mute">Minden mennyiség hivatalos ajánlásból számolt. Az adatok csak ebben a böngészőben tárolódnak.</p>
         </div>
         <div className="no-print flex gap-3">
-          <button onClick={() => window.print()} className="rounded-xl border border-white/12 px-5 py-3 text-sm font-semibold transition hover:bg-white/5">Nyomtatás / PDF</button>
+          <Link href="/terv/kartya" className="btn-ghost rounded-xl px-5 py-3 text-sm font-semibold">Hűtőkártya</Link>
+          <button onClick={() => window.print()} className="btn-ghost rounded-xl px-5 py-3 text-sm font-semibold">Nyomtatás / PDF</button>
           <button onClick={() => confirm("Biztosan törlöd a tervet?") && setS(DEFAULT)} className="rounded-xl px-4 py-3 text-sm text-mute transition hover:text-white">Újrakezdés</button>
         </div>
       </div>
@@ -92,7 +94,7 @@ export default function Planner() {
       <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_380px]">
         <div className="space-y-6">
           {/* Háztartás */}
-          <section className="glass no-print rounded-3xl p-6">
+          <section className="surface no-print rounded-3xl p-6">
             <h2 className="font-display text-xl font-semibold">1 · Háztartás</h2>
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               <Stepper label="Felnőtt" value={s.adults} set={(n) => up("adults", Math.max(1, n))} min={1} />
@@ -134,7 +136,7 @@ export default function Planner() {
           </section>
 
           {/* Készlet */}
-          <section className="glass no-print rounded-3xl p-6">
+          <section className="surface no-print rounded-3xl p-6">
             <h2 className="font-display text-xl font-semibold">2 · Mi van már otthon?</h2>
             <div className="mt-5 grid gap-6 sm:grid-cols-2">
               <label className="text-sm">
@@ -157,7 +159,7 @@ export default function Planner() {
               const ci = items.filter((i) => i.cat === c.id);
               if (!ci.length) return null;
               return (
-                <div key={c.id} className="glass rounded-3xl p-6">
+                <div key={c.id} className="surface rounded-3xl p-6">
                   <div className="flex items-center gap-4">
                     <CategoryIcon id={c.id} size={48} />
                     <div className="flex-1">
@@ -219,7 +221,7 @@ export default function Planner() {
           </section>
 
           {/* Shopping */}
-          <section className="glass no-print rounded-3xl p-6">
+          <section className="surface no-print rounded-3xl p-6">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
                 <h2 className="font-display text-xl font-semibold">4 · Bevásárlólista költségkerettel</h2>
@@ -271,7 +273,7 @@ export default function Planner() {
 
         {/* Sticky summary */}
         <aside className="lg:sticky lg:top-24 lg:h-fit">
-          <div className="glass rounded-3xl p-6">
+          <div className="surface rounded-3xl p-6">
             <div className="flex justify-center">
               <ScoreRing value={Math.round(sc.pct * 100)} label="felkészültség / 100" size={200} />
             </div>
@@ -301,7 +303,7 @@ export default function Planner() {
               <div className="text-xs font-semibold uppercase tracking-wider text-mute">Segélyhívók · {country.name}</div>
               <div className="mt-3 grid grid-cols-2 gap-2">
                 {country.emergency.map((e) => (
-                  <a key={e.number + e.label} href={`tel:${e.number}`} className="rounded-xl bg-white/[.04] px-3 py-2 ring-1 ring-white/8">
+                  <a key={e.number + e.label} href={`tel:${e.number}`} className="keycap px-3 py-2">
                     <div className="font-display text-lg font-bold">{e.number}</div>
                     <div className="text-[11px] text-mute">{e.label}</div>
                   </a>
@@ -309,6 +311,7 @@ export default function Planner() {
               </div>
             </div>
           </div>
+          <button onClick={() => { const t = `Haven72 felkészültség: ${Math.round(sc.pct * 100)}/100 – kb. ${end.days >= 1 ? Math.floor(end.days) + " napig" : Math.round(end.days * 24) + " óráig"} bírnánk külső segítség nélkül. Te hogy állsz? haven72.vercel.app/terv`; navigator.clipboard?.writeText(t); setCopied(true); setTimeout(() => setCopied(false), 1800); }} className="btn-ghost mt-3 w-full rounded-xl px-4 py-3 text-sm font-semibold">{copied ? "Kimásolva ✓" : "Eredmény megosztása"}</button>
           <p className="mt-4 px-2 text-xs leading-relaxed text-mute">
             Tájékoztató jellegű segédlet. Gyógyszerekről orvosod dönt; valós helyzetben a hatósági utasítás az elsődleges.
           </p>

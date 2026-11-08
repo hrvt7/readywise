@@ -2,7 +2,7 @@
 
 Személyre szabott vészhelyzeti felkészülési tervező magyar háztartásoknak, hivatalos EU-s és nemzeti források alapján.
 
-**Stack:** Next.js 15 (App Router) · React 19 · Tailwind CSS v4 · Motion · Supabase (opcionális) · Vercel
+**Stack:** Next.js 15 (App Router) · React 19 · Tailwind CSS v4 · Motion · performative-ui · Supabase (opcionális) · Vercel
 
 ## Oldalak
 
@@ -10,6 +10,9 @@ Személyre szabott vészhelyzeti felkészülési tervező magyar háztartásokna
 | --- | --- |
 | `/` | Landing: animált pontszám, kategóriák, országos összehasonlítás, GYIK, hírlevél |
 | `/terv` | Tervező: háztartás → pontos mennyiségek, ellenőrzőlista, pontszám, „hány napig bírnátok”, költségkeretes bevásárlólista, nyomtatás (adatok csak `localStorage`-ban) |
+| `/forgatokonyvek` | Három forgatókönyv óráról órára (áramszünet télen, vízkimaradás, kitelepítés), tételekhez kötve |
+| `/terv/kartya` | Nyomtatható hűtőkártya: segélyhívók, találkozópont, kontaktok |
+| `/marka` | Arculat: jel, színek, tipográfia, letölthető SVG-k (lásd DESIGN.md) |
 | `/orszagok`, `/orszagok/[code]` | HU, AT, DE, CZ, NL, BE hivatalos ajánlásai + segélyhívók |
 | `/forrasok` | Forrásregiszter: minden forrás linkkel, ellenőrzési dátummal |
 | `/modszertan`, `/adatvedelem` | Számítási módszer, partnerlink-szabályok, adatkezelés |
