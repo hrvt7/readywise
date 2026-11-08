@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  outputFileTracingIncludes: {
+    "/api/story": ["./src/app/api/story/fonts/**"],
+  },
 };
 
 export default nextConfig;

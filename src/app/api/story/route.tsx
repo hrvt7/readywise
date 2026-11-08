@@ -1,4 +1,5 @@
 import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { CATEGORIES } from "@/lib/checklist";
 
@@ -25,7 +26,7 @@ function fonts() {
       name,
       weight,
       style: "normal" as const,
-      data: await readFile(new URL(`./fonts/${file}`, import.meta.url)),
+      data: await readFile(join(process.cwd(), "src/app/api/story/fonts", file)),
     })),
   );
   return fontCache;
