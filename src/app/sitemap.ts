@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { COUNTRIES } from "@/lib/countries";
 
-const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://readywise.vercel.app";
+const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://haven72.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = ["", "/terv", "/orszagok", "/forrasok", "/modszertan", "/adatvedelem"];

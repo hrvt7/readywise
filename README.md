@@ -1,4 +1,4 @@
-# Readywise
+# Haven72
 
 Személyre szabott vészhelyzeti felkészülési tervező magyar háztartásoknak, hivatalos EU-s és nemzeti források alapján.
 

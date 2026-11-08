@@ -221,7 +221,7 @@ export const ITEMS: Item[] = [
     cat: "family",
     label: "Családi terv: találkozópont + papíron a telefonszámok",
     priority: 1,
-    hint: "A Readywise nyomtatható kártyát ad hozzá.",
+    hint: "A Haven72 nyomtatható kártyát ad hozzá.",
     sources: ["nl-denkvooruit"],
   },
   {

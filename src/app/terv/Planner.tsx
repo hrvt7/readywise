@@ -21,7 +21,7 @@ interface State {
 }
 
 const DEFAULT: State = { country: "HU", adults: 2, kids: 0, pets: 0, days: 3, waterHave: 0, foodDaysHave: 0, budget: 30000, checked: {} };
-const KEY = "readywise:plan:v1";
+const KEY = "haven72:plan:v1";
 
 function Stepper({ label, value, set, min = 0, max = 12 }: { label: string; value: number; set: (n: number) => void; min?: number; max?: number }) {
   return (

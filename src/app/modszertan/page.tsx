@@ -38,7 +38,7 @@ const blocks = [
     id: "korlatok",
     t: "Korlátok",
     p: [
-      "A Readywise tájékoztató segédlet, nem hatósági kiadvány. Valós vészhelyzetben mindig a helyi hatóság utasítása az elsődleges.",
+      "A Haven72 tájékoztató segédlet, nem hatósági kiadvány. Valós vészhelyzetben mindig a helyi hatóság utasítása az elsődleges.",
       "Különleges igényeknél (krónikus betegség, csecsemő, mozgáskorlátozottság) kérd orvos vagy szakember tanácsát.",
     ],
   },

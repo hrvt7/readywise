@@ -22,7 +22,7 @@ export function Nav() {
         <Link href="/" className="flex items-center gap-2.5">
           <ShieldLogo />
           <span className="font-display text-lg font-bold tracking-tight">
-            Ready<span className="text-grad">wise</span>
+            Haven<span className="text-grad">72</span>
           </span>
         </Link>
         <nav className="hidden gap-1 md:flex">
@@ -48,7 +48,7 @@ export function Footer() {
         <div className="md:col-span-2">
           <div className="flex items-center gap-2.5">
             <ShieldLogo />
-            <span className="font-display text-lg font-bold">Readywise</span>
+            <span className="font-display text-lg font-bold">Haven72</span>
           </div>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-mute">
             Független, hivatalos forrásokra épülő felkészülési segédlet. Nem helyettesíti a hatósági utasításokat – valós vészhelyzetben mindig a helyi hatóságot kövesd, életveszélyben hívd a 112-t.
@@ -71,7 +71,7 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-line py-6 text-center text-xs text-mute">© {new Date().getFullYear()} Readywise · Adatok utolsó ellenőrzése: 2026. november</div>
+      <div className="border-t border-line py-6 text-center text-xs text-mute">© {new Date().getFullYear()} Haven72 · Adatok utolsó ellenőrzése: 2026. november</div>
     </footer>
   );
 }

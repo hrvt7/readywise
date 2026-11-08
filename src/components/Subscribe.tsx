@@ -44,7 +44,7 @@ export function Subscribe() {
       </div>
       <label className="mt-3 flex items-start gap-2 text-xs text-mute">
         <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 accent-emerald-400" />
-        <span>Hozzájárulok, hogy a Readywise havi emlékeztetőt küldjön. Bármikor leiratkozhatok. Lásd: Adatvédelem.</span>
+        <span>Hozzájárulok, hogy a Haven72 havi emlékeztetőt küldjön. Bármikor leiratkozhatok. Lásd: Adatvédelem.</span>
       </label>
       {msg && <p className={`mt-3 text-sm ${state === "ok" ? "text-emerald-300" : "text-amber-300"}`}>{msg}</p>}
     </form>
