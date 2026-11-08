@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HoverIcon } from "@/components/hover";
 import { SlippyWords } from "@/components/Pui";
 import { Hero } from "@/components/Hero";
 import { CategoryIcon, GuideIcon } from "@/components/Icons";
@@ -143,7 +144,7 @@ export default function Home() {
                 <h2 className="font-display mt-3 text-3xl font-bold md:text-4xl">{task.title}</h2>
                 <p className="mt-3 max-w-xl text-mute">{task.task}</p>
               </div>
-              <Link href="/terv" className="btn-ghost rounded-xl px-6 py-3.5 font-semibold">Pipáld ki a tervezőben →</Link>
+              <Link href="/terv" className="btn-ghost inline-flex items-center gap-2 rounded-xl px-6 py-3.5 font-semibold">Pipáld ki a tervezőben <HoverIcon name="arrow" size={18} /></Link>
             </div>
           </div>
         </Reveal>

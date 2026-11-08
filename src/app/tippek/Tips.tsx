@@ -1,4 +1,5 @@
 "use client";
+import { HoverIcon } from "@/components/hover";
 import { AnimatePresence, motion } from "motion/react";
 import { useMemo, useState } from "react";
 import { COUNTRIES, type CountryCode } from "@/lib/countries";
@@ -35,8 +36,8 @@ export default function Tips() {
           <div className="pointer-events-none absolute -left-20 -top-28 h-80 w-80 rounded-full blur-[100px]" style={{ background: `${tagOf(feat.tag).accent}30` }} />
           <div className="relative flex flex-wrap items-center justify-between gap-3">
             <span className="eyebrow">Véletlen tipp · {tips.length} hivatalos praktikából</span>
-            <button onClick={() => setI((x) => x + 1 + Math.floor(Math.random() * Math.max(1, tips.length - 1)))} className="btn-ghost rounded-xl px-4 py-2 text-sm font-semibold">
-              Következő ↻
+            <button onClick={() => setI((x) => x + 1 + Math.floor(Math.random() * Math.max(1, tips.length - 1)))} className="btn-ghost inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold">
+              Következő <HoverIcon name="refresh" size={16} />
             </button>
           </div>
           <AnimatePresence mode="wait">
@@ -55,12 +56,12 @@ export default function Tips() {
       <div className="mt-10 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div className="-mx-5 overflow-x-auto px-5 md:mx-0 md:px-0 [scrollbar-width:none]">
           <div className="flex w-max gap-2">
-            {[{ id: "all" as const, name: "Mind", accent: "#e5e7eb" }, ...TIP_TAGS].map((t) => {
+            {[{ id: "all" as const, name: "Mind", accent: "#e5e7eb", icon: "sparkles" as const }, ...TIP_TAGS].map((t) => {
               const on = tag === t.id;
               return (
                 <button key={t.id} onClick={() => { setTag(t.id); setLimit(18); }} className={`relative whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold ring-1 transition ${on ? "text-ink ring-transparent" : "text-mute ring-white/10 hover:text-white"}`}>
                   {on && <motion.span layoutId="tagpill" className="absolute inset-0 rounded-full" style={{ background: t.accent }} transition={{ type: "spring", stiffness: 400, damping: 32 }} />}
-                  <span className="relative">{t.name}</span>
+                  <span className="relative flex items-center gap-1.5"><HoverIcon name={t.icon} size={14} />{t.name}</span>
                 </button>
               );
             })}
@@ -78,17 +79,17 @@ export default function Tips() {
             const tg = tagOf(t.tag);
             const s = sourceById(t.source);
             return (
-              <motion.article layout key={t.code + t.title} initial={{ opacity: 0, y: 20, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.35, delay: Math.min(k, 12) * 0.025 }} className="surface surface-hover group relative mb-4 break-inside-avoid overflow-hidden rounded-3xl p-5">
+              <motion.article layout key={t.code + t.title} initial={{ opacity: 0, y: 20, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.35, delay: Math.min(k, 12) * 0.025 }} data-hover className="surface surface-hover group relative mb-4 break-inside-avoid overflow-hidden rounded-3xl p-5">
                 <span className="absolute inset-x-0 top-0 h-px opacity-70" style={{ background: `linear-gradient(90deg, transparent, ${tg.accent}, transparent)` }} />
                 <div className="flex items-center justify-between text-[11px]">
-                  <span className="font-semibold uppercase tracking-wider" style={{ color: tg.accent }}>{tg.name}</span>
+                  <span className="flex items-center gap-2 font-semibold uppercase tracking-wider" style={{ color: tg.accent }}><span className="grid h-8 w-8 place-items-center rounded-xl" style={{ background: `${tg.accent}18`, boxShadow: `inset 0 0 0 1px ${tg.accent}33` }}><HoverIcon name={tg.icon} size={17} /></span>{tg.name}</span>
                   <span className="rounded-md bg-white/[.06] px-1.5 py-0.5 font-mono text-mute">{t.code}</span>
                 </div>
                 <h3 className="font-display mt-3 text-[17px] font-semibold leading-snug">{t.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-mute">{t.text}</p>
                 {s && (
-                  <a href={s.url} target="_blank" rel="noopener" className="mt-4 block truncate text-[11px] text-mute/80 transition hover:text-cyan">
-                    {s.publisher} ↗
+                  <a href={s.url} target="_blank" rel="noopener" className="mt-4 flex items-center gap-1.5 text-[11px] text-mute/80 transition hover:text-cyan">
+                    <span className="truncate">{s.publisher}</span> <HoverIcon name="external" size={12} />
                   </a>
                 )}
               </motion.article>

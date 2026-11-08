@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { HoverIcon } from "@/components/hover";
 import Link from "next/link";
 import { CategoryIcon } from "@/components/Icons";
 import { Reveal, Spot } from "@/components/Motion";
@@ -69,7 +70,7 @@ export default function Page() {
               <h2 className="font-display text-2xl font-bold">Nézd meg, hogy állnál.</h2>
               <p className="mt-2 text-mute">A tervező a te háztartásodra számol: hány napig bírnátok, és mi hiányzik.</p>
             </div>
-            <Link href="/terv" className="btn-primary rounded-xl px-6 py-3.5 font-bold">Tervet készítek →</Link>
+            <Link href="/terv" className="btn-primary inline-flex items-center gap-2 rounded-xl px-6 py-3.5 font-bold">Tervet készítek <HoverIcon name="arrow" size={18} /></Link>
           </div>
         </Reveal>
       </div>

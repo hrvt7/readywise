@@ -35,15 +35,15 @@ export const guideType = (id: string) => GUIDE_TYPES.find((g) => g.id === id);
 
 export type TipTag = "viz" | "etel" | "energia" | "egeszseg" | "csalad" | "otthon" | "info" | "penz";
 
-export const TIP_TAGS: { id: TipTag; name: string; accent: string }[] = [
-  { id: "viz", name: "Víz", accent: "#38bdf8" },
-  { id: "etel", name: "Étel", accent: "#34d399" },
-  { id: "energia", name: "Áram és hő", accent: "#fbbf24" },
-  { id: "egeszseg", name: "Egészség", accent: "#a78bfa" },
-  { id: "csalad", name: "Család", accent: "#f472b6" },
-  { id: "otthon", name: "Otthon", accent: "#22d3ee" },
-  { id: "info", name: "Információ", accent: "#818cf8" },
-  { id: "penz", name: "Pénz és iratok", accent: "#fb923c" },
+export const TIP_TAGS: { id: TipTag; name: string; accent: string; icon: "droplet" | "soup" | "battery" | "heart" | "users" | "home" | "radio" | "wallet" }[] = [
+  { id: "viz", name: "Víz", accent: "#38bdf8", icon: "droplet" },
+  { id: "etel", name: "Étel", accent: "#34d399", icon: "soup" },
+  { id: "energia", name: "Áram és hő", accent: "#fbbf24", icon: "battery" },
+  { id: "egeszseg", name: "Egészség", accent: "#a78bfa", icon: "heart" },
+  { id: "csalad", name: "Család", accent: "#f472b6", icon: "users" },
+  { id: "otthon", name: "Otthon", accent: "#22d3ee", icon: "home" },
+  { id: "info", name: "Információ", accent: "#818cf8", icon: "radio" },
+  { id: "penz", name: "Pénz és iratok", accent: "#fb923c", icon: "wallet" },
 ];
 
 export interface Guide {

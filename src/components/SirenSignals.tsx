@@ -1,4 +1,5 @@
 "use client";
+import { HoverIcon } from "@/components/hover";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
@@ -125,7 +126,7 @@ export default function SirenSignals() {
               {playing === s.id ? (
                 <><span className="flex h-3 items-end gap-0.5">{[0, 1, 2].map((i) => <motion.span key={i} className="w-0.5 rounded bg-white" animate={{ height: [3, 12, 5, 10, 3] }} transition={{ repeat: Infinity, duration: 0.8, delay: i * 0.12 }} />)}</span> Leállít</>
               ) : (
-                <><svg width="10" height="12" viewBox="0 0 10 12"><path d="M0 0l10 6-10 6z" fill="currentColor" /></svg> Hallgasd meg</>
+                <><HoverIcon name="volume" size={15} /> Hallgasd meg</>
               )}
             </button>
           </div>

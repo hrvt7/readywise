@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { HoverIcon } from "@/components/hover";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Reveal } from "@/components/Motion";
@@ -51,7 +52,7 @@ export default async function Page({ params }: { params: Promise<{ code: string 
                   </li>
                 ))}
               </ul>
-              <Link href="/terv" className="btn-primary mt-6 inline-block rounded-xl px-5 py-3 text-sm font-bold">Terv készítése erre az országra →</Link>
+              <Link href="/terv" className="btn-primary mt-6 inline-flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold">Terv készítése erre az országra <HoverIcon name="arrow" size={16} /></Link>
             </div>
           </Reveal>
           {g.alerts && (
@@ -108,9 +109,9 @@ export default async function Page({ params }: { params: Promise<{ code: string 
                   {g.tips.map((t) => {
                     const tg = TIP_TAGS.find((x) => x.id === t.tag)!;
                     return (
-                      <div key={t.title} className="surface surface-hover relative overflow-hidden rounded-2xl p-4">
+                      <div key={t.title} data-hover className="surface surface-hover relative overflow-hidden rounded-2xl p-4">
                         <span className="absolute inset-x-0 top-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${tg.accent}, transparent)` }} />
-                        <div className="text-[10.5px] font-semibold uppercase tracking-wider" style={{ color: tg.accent }}>{tg.name}</div>
+                        <div className="flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-wider" style={{ color: tg.accent }}><HoverIcon name={tg.icon} size={14} />{tg.name}</div>
                         <div className="mt-1.5 font-semibold leading-snug">{t.title}</div>
                         <p className="mt-1 text-sm leading-relaxed text-mute">{t.text}</p>
                       </div>
@@ -143,7 +144,8 @@ export default async function Page({ params }: { params: Promise<{ code: string 
             <h2 className="font-display text-xl font-semibold">Segélyhívó számok</h2>
             <div className="mt-4 space-y-2">
               {c.emergency.map((x) => (
-                <a key={x.number + x.label} href={`tel:${x.number}`} className="flex items-center justify-between rounded-2xl bg-white/[.04] px-4 py-3 ring-1 ring-white/8 transition hover:bg-white/[.07]">
+                <a key={x.number + x.label} href={`tel:${x.number}`} className="flex items-center gap-3 rounded-2xl bg-white/[.04] px-4 py-3 ring-1 ring-white/8 transition hover:bg-white/[.07]">
+                  <HoverIcon name="phone" size={18} className="text-cyan" />
                   <span className="text-sm text-mute">{x.label}</span>
                   <span className="font-display shrink-0 whitespace-nowrap text-2xl font-bold">{x.number}</span>
                 </a>

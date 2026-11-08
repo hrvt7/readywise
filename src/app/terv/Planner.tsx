@@ -1,4 +1,5 @@
 "use client";
+import { HoverIcon } from "@/components/hover";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useMemo, useState } from "react";
@@ -339,10 +340,10 @@ export default function Planner() {
           </div>
           <div className="mt-3 grid grid-cols-[1fr_auto] gap-2">
             <button onClick={shareStory} disabled={storyBusy} className="btn-primary flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold disabled:opacity-60">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" /></svg>
+              <HoverIcon name="instagram" size={17} />
               {storyBusy ? "Kép készül…" : "Story kép megosztása"}
             </button>
-            <button onClick={copyText} title="Szöveg másolása" className="btn-ghost rounded-xl px-4 py-3 text-sm font-semibold">{copied ? "✓" : "Szöveg"}</button>
+            <button onClick={copyText} title="Szöveg másolása" className="btn-ghost inline-flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold"><HoverIcon name={copied ? "checked" : "copy"} size={16} />{copied ? "Kész" : "Szöveg"}</button>
           </div>
           <p className="mt-4 px-2 text-xs leading-relaxed text-mute">
             Tájékoztató jellegű segédlet. Gyógyszerekről orvosod dönt; valós helyzetben a hatósági utasítás az elsődleges.
@@ -363,7 +364,7 @@ export default function Planner() {
             <div className="text-[11px] uppercase tracking-wider text-mute">Felkészültség</div>
             <div className="text-sm font-semibold">{end.days >= 1 ? `kb. ${Math.floor(end.days)} nap` : `kb. ${Math.round(end.days * 24)} óra`} kitartás</div>
           </div>
-          <button onClick={shareStory} disabled={storyBusy} className="btn-primary shrink-0 rounded-xl px-3.5 py-2.5 text-xs font-bold">{storyBusy ? "…" : "Megosztás"}</button>
+          <button onClick={shareStory} disabled={storyBusy} className="btn-primary inline-flex shrink-0 items-center gap-1.5 rounded-xl px-3.5 py-2.5 text-xs font-bold"><HoverIcon name="instagram" size={14} />{storyBusy ? "…" : "Story"}</button>
         </div>
       </div>
     </div>
