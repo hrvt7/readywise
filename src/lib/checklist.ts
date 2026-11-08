@@ -172,16 +172,6 @@ export const ITEMS: Item[] = [
     search: "mécses gyufa",
   },
   {
-    id: "co-alarm",
-    cat: "energy",
-    label: "Szén-monoxid-érzékelő",
-    priority: 2,
-    hint: "Ha alternatív fűtéssel vagy főzéssel készülsz, ez kötelező tartozék.",
-    sources: ["hu-ebes-tel-2026"],
-    estPrice: () => 7000,
-    search: "szén-monoxid érzékelő",
-  },
-  {
     id: "firstaid",
     cat: "health",
     label: "Elsősegélycsomag",
@@ -245,19 +235,12 @@ export const ITEMS: Item[] = [
   {
     id: "gobag",
     cat: "evac",
-    label: "Veszélyhelyzeti csomag (max. 20 kg, könnyen vihető)",
+    label: "Gyorsan felkapható vészhelyzeti csomag (hátizsák)",
     priority: 1,
     hint: "Felkapható hátizsák: víz, étel 1–2 napra, gyógyszer, iratok, lámpa, ruha.",
-    sources: ["hu-koszeg-arviz"],
+    sources: ["de-bbk-ratgeber"],
     estPrice: () => 12000,
     search: "túrahátizsák 40 l",
-  },
-  {
-    id: "shutoff",
-    cat: "evac",
-    label: "Tudod, hol zárod el a vizet, gázt, és hol kapcsolod le az áramot",
-    priority: 1,
-    sources: ["hu-koszeg-arviz"],
   },
 ];
 

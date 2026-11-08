@@ -34,14 +34,13 @@ export const COUNTRIES: CountryRule[] = [
     waterLPerDay: null,
     status: "partial",
     headline:
-      "Országos, mennyiségekkel megadott háztartási készletlistát nem találtunk. Az önkormányzatok és a katasztrófavédelem helyzetspecifikus (árvíz, tél) tájékoztatókat adnak ki.",
+      "Országos, mennyiségekkel megadott háztartási készletlistát nem találtunk, ezért az EU-s ajánlásból és a szomszédos országok hivatalos számaiból indulunk ki.",
     points: [
       "Időtávként az EU 72 órás ajánlását használjuk alapnak.",
       "Vízből a vizsgált hivatalos ajánlások közül a legmagasabbal (3 l/fő/nap, Hollandia) számolunk.",
-      "Kitelepítéskor a veszélyhelyzeti csomag könnyen szállítható, legfeljebb 20 kg (önkormányzati tájékoztató).",
-      "Fűtési idényben kiemelt veszély a szén-monoxid – a CO-érzékelő életet ment.",
+      "Ha elérhetővé válik hivatalos magyar lakossági ajánlás, azonnal arra állunk át.",
     ],
-    sources: ["eu-preparedness-2025", "hu-nkke-2024", "hu-koszeg-arviz", "hu-ebes-tel-2026"],
+    sources: ["eu-preparedness-2025", "hu-nkke-2024", "nl-denkvooruit"],
     emergency: [
       { label: "Általános segélyhívó", number: "112" },
       { label: "Mentők", number: "104" },

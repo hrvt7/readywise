@@ -180,31 +180,6 @@ export const SOURCES: Source[] = [
     checked: "2026-11-08",
     facts: ["Magyarország hivatalos katasztrófakockázat-értékelése."],
   },
-  {
-    id: "hu-koszeg-arviz",
-    publisher: "Kőszeg Város Önkormányzata",
-    title: "Lakossági tájékoztató – árvíz, kitelepítés",
-    region: "HU",
-    year: "–",
-    url: "https://koszeg.hu/pictures/downloadmanager/download.php?id=3849",
-    kind: "official",
-    checked: "2026-11-08",
-    facts: [
-      "Veszélyhelyzeti csomag: könnyen szállítható, legfeljebb 20 kg.",
-      "Távozáskor zárd el a víz- és gázvezetéket, kapcsold le az áramot.",
-    ],
-  },
-  {
-    id: "hu-ebes-tel-2026",
-    publisher: "Ebes Község Önkormányzata",
-    title: "Lakossági tájékoztató téli rendkívüli időjárási helyzetekre (2026)",
-    region: "HU",
-    year: "2026",
-    url: "https://www.ebes.hu/wp-content/uploads/2026/01/lakossagitajekoztato2026.pdf",
-    kind: "official",
-    checked: "2026-11-08",
-    facts: ["A szén-monoxid-mérgezés minden évben halálos áldozatokat követel, de megelőzhető."],
-  },
 ];
 
 export const sourceById = (id: string) => SOURCES.find((s) => s.id === id);

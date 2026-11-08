@@ -18,7 +18,7 @@ export default function Page() {
               <div className="flex flex-wrap items-center gap-2 text-xs">
                 <span className="font-display rounded-lg bg-white/8 px-2 py-1 font-bold">{s.region}</span>
                 <span className={`rounded-full px-2.5 py-1 ${s.kind === "press" ? "bg-amber-400/10 text-amber-300" : "bg-emerald-400/10 text-emerald-300"}`}>{kindLabel[s.kind]}</span>
-                <span className="text-mute">{s.year} · ellenőrizve: {s.checked}</span>
+                <span className="text-mute">{s.year !== "–" ? `${s.year} · ` : ""}ellenőrizve: {s.checked}</span>
               </div>
               <h2 className="font-display mt-3 text-lg font-semibold">
                 <a href={s.url} target="_blank" rel="noopener" className="hover:text-cyan">{s.title} ↗</a>
