@@ -62,6 +62,34 @@ export default function Planner() {
   const items = useMemo(() => activeItems(h), [h]);
   const sc = score(h, s.checked);
   const end = endurance(h, s.waterHave, s.foodDaysHave);
+  const [storyBusy, setStoryBusy] = useState(false);
+  const scorePct = Math.round(sc.pct * 100);
+  const shareText = `Haven72 felkészültség: ${scorePct}/100 – kb. ${end.days >= 1 ? Math.floor(end.days) + " napig" : Math.round(end.days * 24) + " óráig"} bírnánk külső segítség nélkül. Te hogy állsz?`;
+  const copyText = () => {
+    navigator.clipboard?.writeText(`${shareText} haven72.vercel.app/terv`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1800);
+  };
+  const shareStory = async () => {
+    setStoryBusy(true);
+    try {
+      const qs = new URLSearchParams({ s: String(scorePct), d: end.days.toFixed(2), a: String(s.adults), k: String(s.kids), p: String(s.days), c: sc.byCat.map((c) => Math.round(c.pct * 100)).join(",") });
+      const blob = await (await fetch(`/api/story?${qs}`)).blob();
+      const file = new File([blob], `haven72-${scorePct}.png`, { type: "image/png" });
+      if (navigator.canShare?.({ files: [file] })) {
+        await navigator.share({ files: [file], text: `${shareText} haven72.vercel.app/terv` }).catch(() => {});
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = file.name;
+        a.click();
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      }
+    } finally {
+      setStoryBusy(false);
+    }
+  };
   const waterNeed = Math.ceil((s.adults + s.kids) * rule.water * s.days);
 
   const shopping = useMemo(() => {
@@ -311,7 +339,13 @@ export default function Planner() {
               </div>
             </div>
           </div>
-          <button onClick={() => { const t = `Haven72 felkészültség: ${Math.round(sc.pct * 100)}/100 – kb. ${end.days >= 1 ? Math.floor(end.days) + " napig" : Math.round(end.days * 24) + " óráig"} bírnánk külső segítség nélkül. Te hogy állsz? haven72.vercel.app/terv`; navigator.clipboard?.writeText(t); setCopied(true); setTimeout(() => setCopied(false), 1800); }} className="btn-ghost mt-3 w-full rounded-xl px-4 py-3 text-sm font-semibold">{copied ? "Kimásolva ✓" : "Eredmény megosztása"}</button>
+          <div className="mt-3 grid grid-cols-[1fr_auto] gap-2">
+            <button onClick={shareStory} disabled={storyBusy} className="btn-primary flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold disabled:opacity-60">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" /></svg>
+              {storyBusy ? "Kép készül…" : "Story kép megosztása"}
+            </button>
+            <button onClick={copyText} title="Szöveg másolása" className="btn-ghost rounded-xl px-4 py-3 text-sm font-semibold">{copied ? "✓" : "Szöveg"}</button>
+          </div>
           <p className="mt-4 px-2 text-xs leading-relaxed text-mute">
             Tájékoztató jellegű segédlet. Gyógyszerekről orvosod dönt; valós helyzetben a hatósági utasítás az elsődleges.
           </p>
