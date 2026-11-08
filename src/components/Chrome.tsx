@@ -8,10 +8,10 @@ import { Lockup } from "./brand/Logo";
 
 const links = [
   { href: "/terv", label: "Tervező" },
-  { href: "/forgatokonyvek", label: "Forgatókönyvek" },
+  { href: "/helyzetek", label: "Mit tegyek, ha…" },
+  { href: "/tippek", label: "Tippek" },
   { href: "/orszagok", label: "Országok" },
   { href: "/forrasok", label: "Források" },
-  { href: "/modszertan", label: "Módszertan" },
 ];
 
 export function Nav() {
@@ -68,10 +68,9 @@ export function Footer() {
         copyright={`© ${new Date().getFullYear()} Haven72 · Tájékoztató segédlet, nem hatósági kiadvány · Életveszélyben: 112`}
         columns={[
           { heading: "Eszközök", links: [{ label: "Tervező", href: "/terv" }, { label: "Hűtőkártya", href: "/terv/kartya" }, { label: "Forgatókönyvek", href: "/forgatokonyvek" }] },
-          { heading: "Tudás", links: [{ label: "Országok", href: "/orszagok" }, { label: "Forrásregiszter", href: "/forrasok" }, { label: "Módszertan", href: "/modszertan" }] },
-          { heading: "Átláthatóság", links: [{ label: "Adatvédelem", href: "/adatvedelem" }, { label: "Partnerlinkek", href: "/modszertan#partnerlinkek" }, { label: "Márka", href: "/marka" }] },
+          { heading: "Tudás", links: [{ label: "Mit tegyek, ha…", href: "/helyzetek" }, { label: "Tippek", href: "/tippek" }, { label: "Országok", href: "/orszagok" }, { label: "Forrásregiszter", href: "/forrasok" }, { label: "Módszertan", href: "/modszertan" }] },
+          { heading: "Átláthatóság", links: [{ label: "Adatvédelem", href: "/adatvedelem" }, { label: "Partnerlinkek", href: "/modszertan#partnerlinkek" }] },
         ]}
-        social={[{ label: "GitHub", href: "https://github.com/hrvt7/readywise" }]}
         className="!bg-transparent"
       />
     </div>

@@ -27,8 +27,8 @@ export function FridgeCard() {
         <button onClick={() => window.print()} className="btn-primary rounded-xl px-5 py-3 text-sm font-bold">Nyomtatás / PDF</button>
       </div>
 
-      <div className="surface mt-10 rounded-3xl p-8 print:mt-0 print:rounded-none print:p-6">
-        <div className="flex items-center justify-between border-b border-line pb-5 print:border-black">
+      <div className="surface mt-10 rounded-3xl p-5 sm:p-8 print:mt-0 print:rounded-none print:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line pb-5 print:border-black">
           <div className="flex items-center gap-3">
             <Mark size={36} />
             <div>

@@ -162,3 +162,123 @@ export const CategoryIcon = ({ id, size }: { id: string; size?: number }) => {
   const C = map[id] ?? GlobeIcon;
   return <C size={size} />;
 };
+
+/* ── Helyzet-ikonok ───────────────────────────────────────── */
+function mk(from: string, to: string, draw: (id: string) => React.ReactNode) {
+  return function Icon(p: P) {
+    const id = useId().replace(/:/g, "");
+    return (
+      <Frame id={id} from={from} to={to} {...p}>
+        {draw(id)}
+      </Frame>
+    );
+  };
+}
+
+export const SirenIcon = mk("#fca5a5", "#dc2626", (id) => (
+  <>
+    <path d="M22 44V34a10 10 0 0 1 20 0v10Z" fill={`url(#${id}g)`} />
+    <rect x="18" y="44" width="28" height="6" rx="2" fill="#fecaca" />
+    <path d="M32 14v5M18 19l3.5 3.5M46 19l-3.5 3.5M12 31h5M47 31h5" stroke="#fecaca" strokeWidth="2.6" strokeLinecap="round" />
+    <path d="M27 34a5 5 0 0 1 5-5" stroke={`url(#${id}s)`} strokeWidth="3" strokeLinecap="round" />
+  </>
+));
+export const BlackoutIcon = mk("#fde68a", "#d97706", (id) => (
+  <>
+    <path d="M32 12a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24Z" fill={`url(#${id}g)`} />
+    <rect x="25" y="43" width="14" height="4" rx="2" fill="#fef3c7" />
+    <rect x="27" y="49" width="10" height="3" rx="1.5" fill="#fef3c7" opacity=".7" />
+    <path d="M14 14l36 36" stroke="#fff7ed" strokeWidth="3" strokeLinecap="round" />
+  </>
+));
+export const RadiationIcon = mk("#bef264", "#65a30d", (id) => (
+  <>
+    <circle cx="32" cy="32" r="20" fill={`url(#${id}g)`} />
+    <circle cx="32" cy="32" r="4" fill="#1a2e05" />
+    {[0, 120, 240].map((r) => (
+      <path key={r} d="M32 26 L26 15.6 A17 17 0 0 1 38 15.6 Z" fill="#1a2e05" transform={`rotate(${r} 32 32)`} />
+    ))}
+  </>
+));
+export const FloodIcon = mk("#93c5fd", "#1d4ed8", (id) => (
+  <>
+    <path d="M18 34 32 22l14 12v6H18Z" fill="#dbeafe" opacity=".9" />
+    <path d="M10 40c4 3 8 3 11 0s7-3 11 0 7 3 11 0 7-3 11 0v12H10Z" fill={`url(#${id}g)`} />
+    <path d="M10 48c4 3 8 3 11 0s7-3 11 0 7 3 11 0 7-3 11 0" stroke="#eff6ff" strokeWidth="2" strokeLinecap="round" opacity=".8" />
+  </>
+));
+export const HeatIcon = mk("#fdba74", "#ea580c", (id) => (
+  <>
+    <circle cx="32" cy="32" r="10" fill={`url(#${id}g)`} />
+    {Array.from({ length: 8 }).map((_, i) => (
+      <path key={i} d="M32 12v6" stroke="#ffedd5" strokeWidth="3" strokeLinecap="round" transform={`rotate(${i * 45} 32 32)`} />
+    ))}
+  </>
+));
+export const ColdIcon = mk("#bae6fd", "#0284c7", (id) => (
+  <>
+    {[0, 60, 120].map((r) => (
+      <g key={r} transform={`rotate(${r} 32 32)`}>
+        <path d="M32 12v40" stroke={`url(#${id}g)`} strokeWidth="4" strokeLinecap="round" />
+        <path d="M26 16l6 5 6-5M26 48l6-5 6 5" stroke="#e0f2fe" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+    ))}
+  </>
+));
+export const FireIcon = mk("#fda4af", "#e11d48", (id) => (
+  <>
+    <path d="M32 12c2 8 12 12 12 24a12 12 0 0 1-24 0c0-6 3-9 5-12 1 4 3 6 5 6-1-6 0-12 2-18Z" fill={`url(#${id}g)`} />
+    <path d="M32 34c3 3 5 5 5 8a5 5 0 0 1-10 0c0-3 2-5 5-8Z" fill="#ffe4e6" />
+  </>
+));
+export const RunIcon = mk("#67e8f9", "#0891b2", (id) => (
+  <>
+    <circle cx="35" cy="15" r="4.5" fill="#cffafe" />
+    <path d="M33 22 26 30l6 4-3 14M33 22l7 8 6 1M30 34l-9 6" stroke={`url(#${id}g)`} strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M44 44h8m0 0-3-3m3 3-3 3" stroke="#cffafe" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+  </>
+));
+export const SignalIcon = mk("#c4b5fd", "#7c3aed", (id) => (
+  <>
+    <rect x="14" y="38" width="7" height="12" rx="2" fill={`url(#${id}g)`} />
+    <rect x="25" y="30" width="7" height="20" rx="2" fill={`url(#${id}g)`} />
+    <rect x="36" y="22" width="7" height="28" rx="2" fill={`url(#${id}g)`} opacity=".35" />
+    <path d="M46 14l8 8m0-8-8 8" stroke="#ede9fe" strokeWidth="3" strokeLinecap="round" />
+  </>
+));
+export const VirusIcon = mk("#f9a8d4", "#db2777", (id) => (
+  <>
+    <circle cx="32" cy="32" r="12" fill={`url(#${id}g)`} />
+    {Array.from({ length: 8 }).map((_, i) => (
+      <g key={i} transform={`rotate(${i * 45} 32 32)`}>
+        <path d="M32 20v-6" stroke="#fce7f3" strokeWidth="2.6" strokeLinecap="round" />
+        <circle cx="32" cy="12.5" r="2.5" fill="#fce7f3" />
+      </g>
+    ))}
+    <circle cx="28" cy="29" r="2.5" fill="#fce7f3" opacity=".7" />
+  </>
+));
+export const BulbIcon = mk("#fef08a", "#22d3ee", (id) => (
+  <>
+    <path d="M32 12a13 13 0 0 0-7 24v5h14v-5a13 13 0 0 0-7-24Z" fill={`url(#${id}g)`} />
+    <rect x="25" y="43" width="14" height="4" rx="2" fill="#ecfeff" />
+    <path d="M28 22a7 7 0 0 1 4-2" stroke={`url(#${id}s)`} strokeWidth="3" strokeLinecap="round" />
+  </>
+));
+
+export const GUIDE_ICONS: Record<string, (p: P) => React.ReactElement> = {
+  war_airraid: SirenIcon,
+  blackout: BlackoutIcon,
+  nuclear: RadiationIcon,
+  flood: FloodIcon,
+  heat: HeatIcon,
+  cold: ColdIcon,
+  fire: FireIcon,
+  evacuation: RunIcon,
+  cyber: SignalIcon,
+  pandemic: VirusIcon,
+};
+export function GuideIcon({ id, ...p }: P & { id: string }) {
+  const I = GUIDE_ICONS[id] ?? BulbIcon;
+  return <I {...p} />;
+}

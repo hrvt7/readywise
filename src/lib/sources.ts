@@ -1,3 +1,4 @@
+import { EXTRA_SOURCES } from "./sources-extra";
 /**
  * Forrásregiszter – minden számszerű állítás az oldalon ide hivatkozik.
  * Szabály: csak hivatalos (állami / hatósági / EU) kiadvány, vagy annak
@@ -18,7 +19,7 @@ export interface Source {
   facts: string[]; // amit innen átveszünk (saját megfogalmazásban)
 }
 
-export const SOURCES: Source[] = [
+const BASE_SOURCES: Source[] = [
   {
     id: "eu-preparedness-2025",
     publisher: "Európai Bizottság",
@@ -183,3 +184,5 @@ export const SOURCES: Source[] = [
 ];
 
 export const sourceById = (id: string) => SOURCES.find((s) => s.id === id);
+
+export const SOURCES: Source[] = [...BASE_SOURCES, ...EXTRA_SOURCES];

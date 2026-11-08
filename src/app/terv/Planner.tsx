@@ -105,22 +105,22 @@ export default function Planner() {
   const inBudget = shopping.filter((x) => x.fits).reduce((a, x) => a + x.price, 0);
 
   return (
-    <div className="mx-auto max-w-7xl px-5 pt-28 md:px-8 md:pt-36">
+    <div className="mx-auto max-w-7xl px-5 pb-24 pt-28 md:px-8 md:pt-36 lg:pb-0">
       <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div>
           <p className="no-print eyebrow">Tervező</p>
           <h1 className="font-display mt-3 text-4xl font-bold leading-[1.08] tracking-tight md:text-[52px]">A te felkészülési terved</h1>
           <p className="mt-3 max-w-2xl text-mute">Minden mennyiség hivatalos ajánlásból számolt. Az adatok csak ebben a böngészőben tárolódnak.</p>
         </div>
-        <div className="no-print flex gap-3">
+        <div className="no-print flex flex-wrap gap-2 sm:gap-3">
           <Link href="/terv/kartya" className="btn-ghost rounded-xl px-5 py-3 text-sm font-semibold">Hűtőkártya</Link>
           <button onClick={() => window.print()} className="btn-ghost rounded-xl px-5 py-3 text-sm font-semibold">Nyomtatás / PDF</button>
           <button onClick={() => confirm("Biztosan törlöd a tervet?") && setS(DEFAULT)} className="rounded-xl px-4 py-3 text-sm text-mute transition hover:text-white">Újrakezdés</button>
         </div>
       </div>
 
-      <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_380px]">
-        <div className="space-y-6">
+      <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
+        <div className="min-w-0 space-y-6">
           {/* Háztartás */}
           <section className="surface no-print rounded-3xl p-6">
             <h2 className="font-display text-xl font-semibold">1 · Háztartás</h2>
@@ -140,9 +140,9 @@ export default function Planner() {
               </label>
               <div className="text-sm">
                 <span className="text-mute">Időtáv</span>
-                <div className="mt-1.5 grid grid-cols-3 gap-2">
-                  {[3, 10, 14].map((d) => (
-                    <button key={d} onClick={() => up("days", d)} className={`relative rounded-xl px-3 py-3 font-semibold ring-1 transition ${s.days === d ? "text-ink ring-transparent" : "ring-white/10 hover:bg-white/5"}`}>
+                <div className="mt-1.5 flex gap-2">
+                  {[...new Set([3, 10, 14, ...(country.officialDays ? [country.officialDays] : [])])].sort((a, b) => a - b).map((d) => (
+                    <button key={d} onClick={() => up("days", d)} className={`relative flex-1 rounded-xl px-2 py-3 font-semibold ring-1 transition ${s.days === d ? "text-ink ring-transparent" : "ring-white/10 hover:bg-white/5"}`}>
                       {s.days === d && <motion.span layoutId="daypill" className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400" />}
                       <span className="relative">{d} nap</span>
                     </button>
@@ -154,7 +154,7 @@ export default function Planner() {
               <b>{country.name}:</b>{" "}
               {country.officialDays ? `hivatalos ajánlás ${country.officialDays} nap` : "nincs hivatalos időtáv – az EU 72 órás ajánlása az alap"}
               {" · "}
-              víz {rule.water} l/fő/nap{rule.waterIsFallback && " (tartalékérték: a legóvatosabb vizsgált hivatalos ajánlás, NL)"}.
+              víz {rule.water.toLocaleString("hu-HU")} l/fő/nap{rule.waterIsFallback && " (tartalékérték: a legóvatosabb vizsgált hivatalos ajánlás, NL)"}.
               {country.officialDays && country.officialDays !== s.days && (
                 <button onClick={() => up("days", country.officialDays!)} className="ml-2 text-cyan underline-offset-2 hover:underline">
                   Állítsd {country.officialDays} napra
@@ -271,20 +271,18 @@ export default function Planner() {
                   const link = shopLink(item.search!);
                   const cat = CATEGORIES.find((c) => c.id === item.cat)!;
                   return (
-                    <motion.li layout key={item.id} className={`flex items-center gap-4 rounded-2xl px-4 py-3 ring-1 transition ${fits ? "bg-white/[.04] ring-white/8" : "opacity-45 ring-transparent"}`}>
-                      <CategoryIcon id={cat.id} size={36} />
-                      <div className="flex-1 text-sm">
-                        <div className="font-semibold">
+                    <motion.li layout key={item.id} className={`flex items-center gap-3 rounded-2xl px-3 py-3 ring-1 transition sm:gap-4 sm:px-4 ${fits ? "bg-white/[.04] ring-white/8" : "opacity-45 ring-transparent"}`}>
+                      <CategoryIcon id={cat.id} size={32} />
+                      <div className="min-w-0 flex-1 text-sm">
+                        <div className="font-semibold leading-snug">
                           {item.label}
                           {link.partner && <span className="ml-2 rounded-md border border-amber-400/40 px-1.5 py-0.5 text-[10px] text-amber-300">partnerlink</span>}
                         </div>
-                        <div className="text-xs text-mute">{fits ? "belefér a keretbe" : "kereten kívül"}</div>
+                        <div className="mt-0.5 text-xs text-mute">
+                          <span className="font-semibold text-white/85">~{huf(price)}</span> · becslés · {fits ? "belefér a keretbe" : "kereten kívül"}
+                        </div>
                       </div>
-                      <div className="text-right text-sm">
-                        <div className="font-semibold">~{huf(price)}</div>
-                        <div className="text-[10px] text-mute">becslés</div>
-                      </div>
-                      <a href={link.href} target="_blank" rel={link.partner ? "sponsored noopener" : "noopener"} className="rounded-lg bg-white/8 px-3 py-2 text-xs font-semibold transition hover:bg-white/15">
+                      <a href={link.href} target="_blank" rel={link.partner ? "sponsored noopener" : "noopener"} className="shrink-0 rounded-lg bg-white/8 px-3 py-2 text-xs font-semibold transition hover:bg-white/15">
                         Árak →
                       </a>
                     </motion.li>
@@ -300,7 +298,7 @@ export default function Planner() {
         </div>
 
         {/* Sticky summary */}
-        <aside className="lg:sticky lg:top-24 lg:h-fit">
+        <aside className="min-w-0 lg:sticky lg:top-24 lg:h-fit">
           <div className="surface rounded-3xl p-6">
             <div className="flex justify-center">
               <ScoreRing value={Math.round(sc.pct * 100)} label="felkészültség / 100" size={200} />
@@ -350,6 +348,23 @@ export default function Planner() {
             Tájékoztató jellegű segédlet. Gyógyszerekről orvosod dönt; valós helyzetben a hatósági utasítás az elsődleges.
           </p>
         </aside>
+      </div>
+      <div className="no-print fixed inset-x-3 bottom-3 z-40 lg:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
+        <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-ink/85 px-4 py-3 shadow-[0_12px_40px_rgba(0,0,0,.5)] backdrop-blur-xl">
+          <div className="relative h-11 w-11 shrink-0">
+            <svg viewBox="0 0 44 44" className="h-11 w-11 -rotate-90">
+              <circle cx="22" cy="22" r="18" stroke="rgba(255,255,255,.1)" strokeWidth="4" fill="none" />
+              <motion.circle cx="22" cy="22" r="18" stroke="url(#mbar)" strokeWidth="4" fill="none" strokeLinecap="round" strokeDasharray={113.1} animate={{ strokeDashoffset: 113.1 * (1 - sc.pct) }} transition={{ type: "spring", stiffness: 90, damping: 18 }} />
+              <defs><linearGradient id="mbar"><stop stopColor="#34d399" /><stop offset="1" stopColor="#818cf8" /></linearGradient></defs>
+            </svg>
+            <span className="font-display absolute inset-0 grid place-items-center text-xs font-bold">{scorePct}</span>
+          </div>
+          <div className="min-w-0 flex-1 leading-tight">
+            <div className="text-[11px] uppercase tracking-wider text-mute">Felkészültség</div>
+            <div className="text-sm font-semibold">{end.days >= 1 ? `kb. ${Math.floor(end.days)} nap` : `kb. ${Math.round(end.days * 24)} óra`} kitartás</div>
+          </div>
+          <button onClick={shareStory} disabled={storyBusy} className="btn-primary shrink-0 rounded-xl px-3.5 py-2.5 text-xs font-bold">{storyBusy ? "…" : "Megosztás"}</button>
+        </div>
       </div>
     </div>
   );

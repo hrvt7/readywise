@@ -1,4 +1,6 @@
-export type CountryCode = "HU" | "AT" | "DE" | "CZ" | "NL" | "BE";
+import { EXTRA_COUNTRIES } from "./countries-extra";
+
+export type CountryCode = "HU" | "AT" | "DE" | "CZ" | "NL" | "BE" | "SK" | "PL" | "RO" | "FR" | "CH" | "SE" | "FI" | "NO" | "DK" | "EE";
 
 export interface CountryRule {
   code: CountryCode;
@@ -26,23 +28,24 @@ export const FALLBACK = {
   waterSource: "nl-denkvooruit",
 };
 
-export const COUNTRIES: CountryRule[] = [
+const BASE_COUNTRIES: CountryRule[] = [
   {
     code: "HU",
     name: "Magyarország",
     officialDays: null,
-    waterLPerDay: null,
+    waterLPerDay: 3,
     status: "partial",
     headline:
-      "Országos, mennyiségekkel megadott háztartási készletlistát nem találtunk, ezért az EU-s ajánlásból és a szomszédos országok hivatalos számaiból indulunk ki.",
+      "Egységes országos „ennyi napra készülj” ajánlás nincs, de a katasztrófavédelem egy hétre elegendő élelmiszert javasol az egész családnak, elzárkózáshoz pedig fejenként napi 3–4 liter ivóvizet.",
     points: [
-      "Időtávként az EU 72 órás ajánlását használjuk alapnak.",
-      "Vízből a vizsgált hivatalos ajánlások közül a legmagasabbal (3 l/fő/nap, Hollandia) számolunk.",
-      "Ha elérhetővé válik hivatalos magyar lakossági ajánlás, azonnal arra állunk át.",
+      "Élelmiszer: egy hétre elegendő az egész családnak (téli, energiakiesési ajánlás).",
+      "Ivóvíz elzárkózáshoz: fejenként napi 3–4 liter – a tervező az alsó, 3 literes értékkel számol.",
+      "Veszélyhelyzeti csomag: legfeljebb 20 kg, 2–3 napi élelem, 1 liter ivóvíz.",
+      "Időtávként az EU 72 órás ajánlása az alap; a tervezőben 10 vagy 14 napra is állíthatod.",
     ],
-    sources: ["eu-preparedness-2025", "hu-nkke-2024", "nl-denkvooruit"],
+    sources: ["hu-okf-hideg", "hu-okf-nuklearis", "hu-okf-kitelepites", "eu-preparedness-2025"],
     emergency: [
-      { label: "Általános segélyhívó", number: "112" },
+      { label: "Általános segélyhívó (magyarul, angolul, németül; SMS-ben is)", number: "112" },
       { label: "Mentők", number: "104" },
       { label: "Tűzoltóság", number: "105" },
       { label: "Rendőrség", number: "107" },
@@ -61,12 +64,7 @@ export const COUNTRIES: CountryRule[] = [
       "Külön figyelem: babák, kisgyerekek, betegek, háziállatok.",
     ],
     sources: ["at-zsv-bevorraten", "at-tirol-blackout"],
-    emergency: [
-      { label: "Általános segélyhívó", number: "112" },
-      { label: "Tűzoltóság", number: "122" },
-      { label: "Rendőrség", number: "133" },
-      { label: "Mentők", number: "144" },
-    ],
+    emergency: [{"label": "Tűzoltóság (Feuerwehr)", "number": "122"}, {"label": "Rendőrség (Polizei)", "number": "133"}, {"label": "Mentők (Rettung)", "number": "144"}, {"label": "Európai segélyhívó", "number": "112"}, {"label": "Ügyeletes orvos (Ärztenotdienst)", "number": "141"}, {"label": "Gázügyelet", "number": "128"}, {"label": "Hegyimentés", "number": "140"}, {"label": "Tartományi riasztási központ (nem minden tartományban)", "number": "130"}, {"label": "Méregközpont (Vergiftungsinformationszentrale)", "number": "01 406 43 43"}],
   },
   {
     code: "DE",
@@ -81,10 +79,7 @@ export const COUNTRIES: CountryRule[] = [
       "Hivatalos online készletkalkulátor is elérhető.",
     ],
     sources: ["de-bbk-ratgeber", "de-bbk-checkliste", "de-ble-kalkulator"],
-    emergency: [
-      { label: "Mentők / tűzoltóság", number: "112" },
-      { label: "Rendőrség", number: "110" },
-    ],
+    emergency: [{"label": "Tűzoltóság és mentők", "number": "112"}, {"label": "Rendőrség", "number": "110"}, {"label": "Hatósági ügyfélvonal (Behördenrufnummer)", "number": "115"}, {"label": "Orvosi ügyelet (rendelési időn kívül)", "number": "116117"}, {"label": "Telefonos lelkisegély (Telefonseelsorge)", "number": "0800 111 0 111 / 0800 111 0 222 / 116 123"}],
   },
   {
     code: "CZ",
@@ -99,12 +94,7 @@ export const COUNTRIES: CountryRule[] = [
       "Életveszélyben a 72 órás elv nem érvényes – azonnal hívj segítséget.",
     ],
     sources: ["cz-72h", "cz-72h-water"],
-    emergency: [
-      { label: "Általános segélyhívó", number: "112" },
-      { label: "Tűzoltóság", number: "150" },
-      { label: "Mentők", number: "155" },
-      { label: "Rendőrség", number: "158" },
-    ],
+    emergency: [{"label": "Egységes európai segélyhívó", "number": "112"}, {"label": "Tűzoltóság", "number": "150"}, {"label": "Mentők", "number": "155"}, {"label": "Rendőrség", "number": "158"}, {"label": "Lelki elsősegély-vonal (non-stop, ingyenes)", "number": "+420 116 123"}, {"label": "Biztonsági vonal gyerekeknek, diákoknak 26 éves korig (non-stop, ingyenes)", "number": "+420 116 111"}, {"label": "Idősek segélyvonala (non-stop, ingyenes)", "number": "+420 800 157 157"}],
   },
   {
     code: "NL",
@@ -119,22 +109,24 @@ export const COUNTRIES: CountryRule[] = [
       "Elemes rádió, zseblámpa, powerbank, iratmásolatok.",
     ],
     sources: ["nl-denkvooruit", "nl-noodpakket"],
-    emergency: [{ label: "Általános segélyhívó", number: "112" }],
+    emergency: [{"label": "Segélyhívó (csak életveszély, sürgős eset)", "number": "112"}, {"label": "Országos gáz- és áramhiba-bejelentő", "number": "0800-9009"}, {"label": "Tűzoltóság, nem sürgős (viharkár, elöntés)", "number": "0900-0904"}],
   },
   {
     code: "BE",
     name: "Belgium",
     officialDays: 3,
-    waterLPerDay: null,
-    status: "partial",
-    headline: "Belgium 2026-ban négyéves kampányt indított 72 órás vészhelyzeti csomaggal.",
-    points: [
-      "Időtáv: 72 óra.",
-      "Pontos vízmennyiséget a forrásainkban nem ellenőriztünk – itt a 3 l/fő/nap tartalékértékkel számolunk.",
-    ],
-    sources: ["be-nccn-2026", "eu-preparedness-2025"],
-    emergency: [{ label: "Általános segélyhívó", number: "112" }],
+    waterLPerDay: 3,
+    status: "official",
+    headline: "Belgium – az egész EU-hoz hasonlóan – legalább 3 napra (72 órára) elegendő otthoni vészcsomagot javasol.",
+    points: ["Önellátás: legalább 3 nap (72 óra).", "Víz: fejenként naponta 3–10 liter; egy felnőtt 1,5–2 litert iszik naponta.", "Készpénz: kb. 72 órára elegendő, de nagy összeget ne tarts otthon.", "Menekülőcsomag: fejenként 1 liter víz és legalább 3 napi alapvető gyógyszer."],
+    sources: ["be-cc-kit", "be-nccn-2026", "eu-preparedness-2025"],
+    emergency: [{"label": "Mentők vagy tűzoltóság (segélyhívó központ)", "number": "112"}, {"label": "Rendőrség, sürgős", "number": "101"}, {"label": "Tűzoltóság, nem sürgős (ha aktív; 1722.be is)", "number": "1722"}, {"label": "Ügyeletes háziorvos (nem sürgős orvosi eset)", "number": "1733"}, {"label": "BE-Alert küldőszámai (SMS/hanghívás)", "number": "1789 / 0477 77 77 55"}],
   },
+];
+
+export const COUNTRIES: CountryRule[] = [
+  ...BASE_COUNTRIES,
+  ...([...EXTRA_COUNTRIES] as unknown as CountryRule[]).sort((a, b) => a.name.localeCompare(b.name, "hu")),
 ];
 
 export const countryByCode = (c: string) =>
@@ -148,3 +140,4 @@ export function effectiveRule(c: CountryRule) {
     daysIsFallback: c.officialDays == null,
   };
 }
+export const num = (n: number) => n.toLocaleString("hu-HU");

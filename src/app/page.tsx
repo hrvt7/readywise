@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { SlippyWords } from "@/components/Pui";
 import { Hero } from "@/components/Hero";
-import { CategoryIcon } from "@/components/Icons";
+import { CategoryIcon, GuideIcon } from "@/components/Icons";
 import { CountUp, Reveal, Spot } from "@/components/Motion";
 import { Subscribe } from "@/components/Subscribe";
 import { CATEGORIES } from "@/lib/checklist";
-import { COUNTRIES, effectiveRule } from "@/lib/countries";
+import { COUNTRIES, effectiveRule, num } from "@/lib/countries";
+import { GUIDE_TYPES, guidesByType } from "@/lib/guides";
 import { MONTHLY, SCENARIOS } from "@/lib/scenarios";
 import { SOURCES } from "@/lib/sources";
 
@@ -26,7 +27,7 @@ const steps = [
 const faq = [
   { q: "Ez pánikkeltés?", a: "Nem. Az EU és több tagállam a nyugodt, előre végiggondolt felkészülést ajánlja: áramszünetre, vízkimaradásra, árvízre, rendkívüli időjárásra. A háború egy a kockázatok közül, nem a kiindulópont." },
   { q: "Honnan vannak a számok?", a: "Kizárólag hivatalos kiadványokból: EU, német BBK, osztrák polgári védelem, holland és cseh kormány. Minden tételnél ott a forrás, a Forrásregiszterben az ellenőrzés dátuma is." },
-  { q: "Van hivatalos magyar lista?", a: "Országos, mennyiségekkel megadott háztartási listát nem találtunk. Ezért az EU 72 órás ajánlásából és a vizsgált hivatalos ajánlások közül a legóvatosabb vízmennyiségből (3 l/fő/nap) indulunk, és ezt jelezzük is." },
+  { q: "Van hivatalos magyar lista?", a: "Egységes, mennyiségekkel megadott országos listát nem találtunk, de a katasztrófavédelem több útmutatót ad: egy hétre elegendő élelmiszert, elzárkózáshoz fejenként napi 3–4 liter vizet, és lépésenkénti teendőket árvízre, kitelepítésre, áramszünetre, hidegre, hőségre és sugárzásra. Ezekből dolgozunk, időtávként pedig az EU 72 órás ajánlása az alap." },
   { q: "Pénzt kerestek rajta?", a: "A bevásárlólistában lehetnek partnerlinkek, mindig jelölve. A sorrendet a hiány és a fontosság adja, nem a jutalék." },
 ];
 
@@ -148,37 +149,59 @@ export default function Home() {
         </Reveal>
       </section>
 
+      {/* SITUATIONS */}
+      <section className="mx-auto mt-32 max-w-7xl px-5 md:px-8">
+        <Reveal>
+          <p className="eyebrow">Mit tegyek, ha…?</p>
+          <h2 className="font-display mt-3 max-w-3xl text-4xl font-bold leading-[1.08] md:text-[44px]">Légiriadó, áramszünet, árvíz. <span className="text-grad">Lépésről lépésre.</span></h2>
+          <p className="mt-4 max-w-2xl text-mute">{COUNTRIES.length} európai ország polgári védelmének hivatalos útmutatói egy helyen, helyzetenként, forrással.</p>
+        </Reveal>
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {GUIDE_TYPES.filter((g) => guidesByType(g.id).length).map((g, i) => (
+            <Reveal key={g.id} delay={(i % 5) * 0.05}>
+              <Spot href={`/helyzetek#${g.id}`} as="a" className="group block h-full rounded-3xl p-4 transition duration-500 hover:-translate-y-1 sm:p-5">
+                <GuideIcon id={g.id} size={44} />
+                <div className="mt-4 font-semibold leading-snug">{g.short}</div>
+                <div className="mt-1 text-xs text-mute">{guidesByType(g.id).length} ország útmutatója</div>
+              </Spot>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
       {/* COUNTRIES */}
       <section className="mx-auto mt-32 max-w-7xl px-5 md:px-8">
         <Reveal>
-          <p className="eyebrow">Országok</p>
-          <h2 className="font-display mt-3 text-4xl font-bold leading-[1.08] md:text-[44px]">Mit ajánlanak a hatóságok?</h2>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <div className="surface mt-10 overflow-x-auto rounded-3xl">
-            <table className="w-full min-w-[640px] text-left text-sm">
-              <thead>
-                <tr className="border-b border-line">
-                  {["Ország", "Időtáv", "Víz / fő / nap", "Státusz", ""].map((h) => <th key={h} className="eyebrow p-5 font-medium">{h}</th>)}
-                </tr>
-              </thead>
-              <tbody>
-                {COUNTRIES.map((c) => {
-                  const e = effectiveRule(c);
-                  return (
-                    <tr key={c.code} className="border-b border-line/60 transition last:border-0 hover:bg-white/[.025]">
-                      <td className="p-5 font-semibold"><span className="keycap mr-3 px-2 py-0.5 text-[11px] text-mute">{c.code}</span>{c.name}</td>
-                      <td className="p-5 tabular-nums">{c.officialDays ? `${c.officialDays} nap` : <span className="text-mute">nincs hivatalos · {e.days} nap (EU)</span>}</td>
-                      <td className="p-5 tabular-nums">{c.waterLPerDay ? `${c.waterLPerDay} liter` : <span className="text-mute">nincs ellenőrzött · {e.water} l</span>}</td>
-                      <td className="p-5"><span className={`rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider ${c.status === "official" ? "bg-mint/10 text-mint" : "bg-amber/10 text-amber"}`}>{c.status === "official" ? "hivatalos" : "részleges"}</span></td>
-                      <td className="p-5 text-right"><Link href={`/orszagok/${c.code.toLowerCase()}`} className="text-cyan hover:underline">Részletek →</Link></td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="eyebrow">Országok</p>
+              <h2 className="font-display mt-3 text-4xl font-bold leading-[1.08] md:text-[44px]">Mit ajánlanak a hatóságok?</h2>
+            </div>
+            <Link href="/orszagok" className="text-sm text-cyan hover:underline">Mind a {COUNTRIES.length} ország →</Link>
           </div>
         </Reveal>
+        <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {COUNTRIES.map((c, i) => {
+            const e = effectiveRule(c);
+            return (
+              <Reveal key={c.code} delay={(i % 4) * 0.04}>
+                <Link href={`/orszagok/${c.code.toLowerCase()}`} className="surface surface-hover block h-full rounded-2xl p-4 transition hover:-translate-y-0.5">
+                  <div className="flex items-center justify-between">
+                    <span className="keycap px-2 py-0.5 font-mono text-[11px] text-mute">{c.code}</span>
+                    <span className={`h-1.5 w-1.5 rounded-full ${c.officialDays ? "bg-mint shadow-[0_0_8px_#34d399]" : "bg-amber"}`} />
+                  </div>
+                  <div className="mt-3 font-semibold">{c.name}</div>
+                  <div className="mt-2 flex items-baseline gap-3 text-sm">
+                    <span className="whitespace-nowrap"><b className="font-display text-xl">{e.days}</b> <span className="text-mute">nap</span></span>
+                    <span className="text-mute">·</span>
+                    <span className="whitespace-nowrap"><b className="font-display text-xl">{num(e.water)}</b> <span className="text-mute">l/nap</span></span>
+                  </div>
+                  <div className="mt-1 text-[11px] text-mute">{c.officialDays ? "hivatalos ajánlás" : "EU-alap / tartalékérték"}</div>
+                </Link>
+              </Reveal>
+            );
+          })}
+        </div>
       </section>
 
       {/* SOURCES slippy */}
@@ -188,8 +211,8 @@ export default function Home() {
           fade
           intensity={160}
           rows={[
-            SOURCES.slice(0, 6).map((s) => ({ label: s.publisher.split("–")[0].split("(")[0].trim() })),
-            SOURCES.slice(5).map((s) => ({ label: s.title.length > 42 ? s.title.slice(0, 40) + "…" : s.title })),
+            SOURCES.filter((x, k, arr) => arr.findIndex((y) => y.publisher === x.publisher) === k).slice(0, 14).map((s) => ({ label: s.publisher.split("–")[0].split("(")[0].trim() })),
+            SOURCES.slice(6, 22).map((s) => ({ label: s.title.length > 42 ? s.title.slice(0, 40) + "…" : s.title })),
           ]}
         />
       </section>
@@ -221,7 +244,7 @@ export default function Home() {
             <div className="relative flex flex-col items-start gap-8 md:flex-row md:items-end md:justify-between">
               <div>
                 <p className="eyebrow">Havi emlékeztető</p>
-                <h2 className="font-display mt-3 max-w-xl text-4xl font-bold leading-[1.08] md:text-[44px]">Tíz perc havonta. Ennyi kell, hogy készen is maradj.</h2>
+                <h2 className="font-display mt-3 max-w-xl text-3xl font-bold sm:text-4xl leading-[1.08] md:text-[44px]">Tíz perc havonta. Ennyi kell, hogy készen is maradj.</h2>
                 <p className="mt-4 max-w-lg text-mute">Egy rövid e-mail: mi jár le, mit tölts fel, mit ellenőrizz. Spam nélkül, bármikor leiratkozhatsz.</p>
               </div>
               <Subscribe />
